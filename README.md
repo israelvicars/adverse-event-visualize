@@ -1,5 +1,7 @@
 # Adverse Event Analyzer
 
+[![Live Demo](https://img.shields.io/badge/Live_Demo-Visit_Site-blue)](https://adverse-event-visualize-mu.vercel.app)
+
 ## Overview
 The Adverse Event Analyzer is a web application built with Next.js and Material-UI (MUI) to help healthcare professionals analyze drug-related adverse event reports using the FDA's OpenFDA Adverse Events API. This tool provides actionable insights through search, filtering, metrics, and time trend visualization, enabling users to understand key metrics (e.g., total reports, deaths, hospitalizations) and trends for specific drugs. Developed as a take-home interview assignment, the project was completed within a 1-hour, 1.5-hour maximum recording window, prioritizing production-readiness over extensive features.
 
@@ -15,17 +17,6 @@ The Adverse Event Analyzer is a web application built with Next.js and Material-
 - `/public`: Static assets (if needed).
 - `package.json`: Project dependencies (Next.js, MUI, Chart.js, etc.).
 - `README.md`: This documentation.
-
-## Documentation
-
-For more detailed information about the project, please refer to the documentation in the `/docs` directory:
-
-* [API Documentation](/docs/API.md) - Details about the API implementation and OpenFDA integration
-* [Architecture Overview](/docs/ARCHITECTURE.md) - System architecture and design decisions
-* [Component Documentation](/docs/COMPONENT.md) - Component structure and implementation details
-* [Project Milestones](/docs/MILESTONES.md) - Development timeline and milestone achievements
-* [Product Requirements](/docs/PRD.md) - Product requirements and specifications
-* [Styling Guide](/docs/STYLING.md) - Style guidelines and UI/UX documentation
 
 ## Getting Started
 
@@ -60,6 +51,7 @@ For more detailed information about the project, please refer to the documentati
 ## Notes
 * The app relies on the public OpenFDA Adverse Events API (https://api.fda.gov/drug/event.json), which requires no authentication.
 * No environment variables or configuration files are needed for this demo.
+* A live deployment is available at [adverse-event-visualize-mu.vercel.app](https://adverse-event-visualize-mu.vercel.app)
 
 ## Development Process
 This project was developed within a 1-hour window (recorded under 1.5 hours) using the following approach:
@@ -70,7 +62,7 @@ This project was developed within a 1-hour window (recorded under 1.5 hours) usi
 * **Time Trend Visualization (0:45-0:55)**: Added TrendChart.tsx for a bar chart of events by year using Chart.js.
 * **Testing & Final Tweaks (0:55-1:00)**: Tested with sample drugs (e.g., "DURAGESIC-100", "ASPIRIN"), fixed bugs, and ensured functionality.
 
-I used VS Code as my IDE, an LLM (Grok 3) for brainstorming and code suggestions, and git for version control (commits marked milestones 1-5). The screen recording captures this process, submitted within 4 hours of receiving the challenge.
+I used Cursor as my IDE, an LLM (Grok 3) for brainstorming and code suggestions, and git for version control (commits marked milestones 1-5). The screen recording captures this process, submitted within 4 hours of receiving the challenge.
 
 ## Technical Choices & Tradeoffs
 * **Next.js with App Router**: Chosen for rapid setup, server-side rendering, and API routes, ensuring production-readiness. Tradeoff: Limited time prevented exploring other frameworks like Remix or Svelte.
@@ -92,3 +84,14 @@ I used VS Code as my IDE, an LLM (Grok 3) for brainstorming and code suggestions
 * **Data Caching**: Use SWR or React Query for better performance.
 * **Accessibility**: Enhance ARIA labels and keyboard navigation for WCAG compliance.
 * **UI Polish**: Add custom animations, tooltips for charts, and a more detailed layout.
+
+## Documentation
+
+For more detailed information about the project, please refer to the documentation in the `/docs` directory:
+
+* [API Documentation](/docs/API.md) - Details about the API implementation and OpenFDA integration
+* [Architecture Overview](/docs/ARCHITECTURE.md) - System architecture and design decisions
+* [Component Documentation](/docs/COMPONENT.md) - Component structure and implementation details
+* [Project Milestones](/docs/MILESTONES.md) - Development timeline and milestone achievements
+* [Product Requirements](/docs/PRD.md) - Product requirements and specifications
+* [Styling Guide](/docs/STYLING.md) - Style guidelines and UI/UX documentation
