@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 
 const FDA_API_BASE_URL = "https://api.fda.gov/drug/event.json";
-const LIMIT = 100;
+const LIMIT = 1000;
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
