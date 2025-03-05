@@ -22,7 +22,25 @@ ChartJS.register(
 
 interface Event {
   receivedate: string;
-  [key: string]: any;
+  seriousnessdeath?: string;
+  seriousnesshospitalization?: string;
+  primarysource?: {
+    qualification?: string;
+    reportercountry?: string;
+  };
+  patient?: {
+    patientonsetage?: number;
+    patientonsetageunit?: string;
+    patientsex?: string;
+  };
+  drug?: Array<{
+    medicinalproduct?: string;
+    drugcharacterization?: string;
+  }>;
+  reaction?: Array<{
+    reactionmeddrapt?: string;
+    reactionoutcome?: string;
+  }>;
 }
 
 interface TrendChartProps {

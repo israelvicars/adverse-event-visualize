@@ -10,7 +10,23 @@ interface Event {
   receivedate: string;
   seriousnessdeath?: string;
   seriousnesshospitalization?: string;
-  [key: string]: any;
+  primarysource?: {
+    qualification?: string;
+    reportercountry?: string;
+  };
+  patient?: {
+    patientonsetage?: number;
+    patientonsetageunit?: string;
+    patientsex?: string;
+  };
+  drug?: Array<{
+    medicinalproduct?: string;
+    drugcharacterization?: string;
+  }>;
+  reaction?: Array<{
+    reactionmeddrapt?: string;
+    reactionoutcome?: string;
+  }>;
 }
 
 export default function Home() {
