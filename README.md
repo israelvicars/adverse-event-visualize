@@ -19,6 +19,17 @@ The Adverse Event Analyzer is a web application built with Next.js, Tailwind CSS
 - `README.md`: This documentation.
 - `/docs`: Additional documentation used as reference by LLMs
 
+## Documentation
+
+For more detailed information about the project, please refer to the specifications in the /docs directory, which were generated to serve as references and guides for the LLM:
+
+* [API Documentation](/docs/API.md) - Details about the API implementation and OpenFDA integration
+* [Architecture Overview](/docs/ARCHITECTURE.md) - System architecture and design decisions
+* [Component Documentation](/docs/COMPONENTS.md) - Component structure and implementation details
+* [Project Milestones](/docs/MILESTONES.md) - Development timeline and milestone achievements
+* [Product Requirements](/docs/PRD.md) - Product requirements and specifications
+* [Styling Guide](/docs/STYLING.md) - Style guidelines and UI/UX documentation
+
 ## Getting Started
 
 ### Prerequisites
@@ -62,7 +73,7 @@ This project was developed within a 1.5-hour window using the following plan:
 * **Seriousness Filter & Metrics (0:30-0:45)**: Implemented FilterDropdown.tsx and MetricsDisplay.tsx to filter by seriousness and display metrics (total, deaths, hospitalizations, etc.).
 * **Time Trend Visualization (0:45-0:55)**: Added TrendChart.tsx for a bar chart of events by year using Chart.js.
 * **Testing & Final Tweaks (0:55-1:00)**: Tested with sample drugs (e.g., "DURAGESIC-100", "ASPIRIN"), fixed bugs, and ensured functionality.
-* **Research & Overage (1:00-1:30)**: Extra time dedicated to explore public API and for things to go wrong 
+* **Research & Overage (1:00-1:30)**: Extra time dedicated to explore public API and for things to go wrong.
 
 I used Cursor as my IDE, an LLM (Grok 3) for brainstorming and code suggestions, and git for version control (commits marked milestones 1-5). The screen recording captures this process, submitted within 4 hours of receiving the challenge.
 
@@ -88,14 +99,3 @@ I used Cursor as my IDE, an LLM (Grok 3) for brainstorming and code suggestions,
 * **Accessibility**: Enhance ARIA labels and keyboard navigation for WCAG compliance.
 * **UI Polish**: Add custom animations, tooltips for charts, and a more detailed layout.
 * **Component Library**: Expand Shadcn UI component usage for consistent UI patterns.
-
-## Documentation
-
-For more detailed information about the project, please refer to the documentation in the `/docs` directory:
-
-* [API Documentation](/docs/API.md) - Details about the API implementation and OpenFDA integration
-* [Architecture Overview](/docs/ARCHITECTURE.md) - System architecture and design decisions
-* [Component Documentation](/docs/COMPONENTS.md) - Component structure and implementation details
-* [Project Milestones](/docs/MILESTONES.md) - Development timeline and milestone achievements
-* [Product Requirements](/docs/PRD.md) - Product requirements and specifications
-* [Styling Guide](/docs/STYLING.md) - Style guidelines and UI/UX documentation
