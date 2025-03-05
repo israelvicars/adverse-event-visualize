@@ -1,36 +1,94 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Adverse Event Analyzer
+
+## Overview
+The Adverse Event Analyzer is a web application built with Next.js and Material-UI (MUI) to help healthcare professionals analyze drug-related adverse event reports using the FDA's OpenFDA Adverse Events API. This tool provides actionable insights through search, filtering, metrics, and time trend visualization, enabling users to understand key metrics (e.g., total reports, deaths, hospitalizations) and trends for specific drugs. Developed as a take-home interview assignment, the project was completed within a 1-hour, 1.5-hour maximum recording window, prioritizing production-readiness over extensive features.
+
+## Features
+- **Drug Search**: Search for adverse events by drug name (e.g., "DURAGESIC-100").
+- **Seriousness Filtering**: Filter results by "All", "Death", or "Hospitalization".
+- **Key Metrics Display**: Show total reports, deaths, hospitalizations, life-threatening events, serious non-death/hospitalization events, and reports by patient sex.
+- **Time Trend Visualization**: Visualize adverse event counts by year using a bar chart.
+
+## Project Structure
+- `/app`: Next.js App Router directory with `page.jsx`, `layout.jsx`, and API routes (`/api/adverse-events/route.js`).
+- `/components`: Reusable components (`SearchBar.tsx`, `FilterDropdown.tsx`, `MetricsDisplay.tsx`, `TrendChart.tsx`).
+- `/public`: Static assets (if needed).
+- `package.json`: Project dependencies (Next.js, MUI, Chart.js, etc.).
+- `README.md`: This documentation.
+
+## Documentation
+
+For more detailed information about the project, please refer to the documentation in the `/docs` directory:
+
+* [API Documentation](/docs/API.md) - Details about the API implementation and OpenFDA integration
+* [Architecture Overview](/docs/ARCHITECTURE.md) - System architecture and design decisions
+* [Component Documentation](/docs/COMPONENT.md) - Component structure and implementation details
+* [Project Milestones](/docs/MILESTONES.md) - Development timeline and milestone achievements
+* [Product Requirements](/docs/PRD.md) - Product requirements and specifications
+* [Styling Guide](/docs/STYLING.md) - Style guidelines and UI/UX documentation
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+- Node.js (v16 or later).
+- npm (comes with Node.js).
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### Installation
+1. Clone the repository:
+   ```bash
+   git clone <repository-url>
+   cd adverse-event-analyzer
+   ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. Ensure you have internet access (no API keys needed for OpenFDA).
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Running the App
+1. Start the development server:
+   ```bash
+   npm run dev
+   ```
 
-## Learn More
+2. Open your browser to http://localhost:3000 to view the app.
 
-To learn more about Next.js, take a look at the following resources:
+3. Use the search bar to enter a drug name (e.g., "DURAGESIC-100"), apply filters, and view metrics and trends.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Notes
+* The app relies on the public OpenFDA Adverse Events API (https://api.fda.gov/drug/event.json), which requires no authentication.
+* No environment variables or configuration files are needed for this demo.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Development Process
+This project was developed within a 1-hour window (recorded under 1.5 hours) using the following approach:
 
-## Deploy on Vercel
+* **Setup (0:00-0:10)**: Created a Next.js app with MUI, set up basic layout, and installed dependencies (Next.js, MUI, Chart.js).
+* **API Integration & Search (0:10-0:30)**: Built a server-side route handler (/api/adverse-events) to fetch OpenFDA data, added SearchBar.tsx for drug search.
+* **Seriousness Filter & Metrics (0:30-0:45)**: Implemented FilterDropdown.tsx and MetricsDisplay.tsx to filter by seriousness and display metrics (total, deaths, hospitalizations, etc.).
+* **Time Trend Visualization (0:45-0:55)**: Added TrendChart.tsx for a bar chart of events by year using Chart.js.
+* **Testing & Final Tweaks (0:55-1:00)**: Tested with sample drugs (e.g., "DURAGESIC-100", "ASPIRIN"), fixed bugs, and ensured functionality.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+I used VS Code as my IDE, an LLM (Grok 3) for brainstorming and code suggestions, and git for version control (commits marked milestones 1-5). The screen recording captures this process, submitted within 4 hours of receiving the challenge.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Technical Choices & Tradeoffs
+* **Next.js with App Router**: Chosen for rapid setup, server-side rendering, and API routes, ensuring production-readiness. Tradeoff: Limited time prevented exploring other frameworks like Remix or Svelte.
+* **Material-UI (MUI)**: Selected for its professional, healthcare-friendly styling and quick component integration. Tradeoff: Default MUI styling was prioritized over custom CSS for speed, potentially limiting unique design.
+* **Chart.js for Visualization**: Lightweight and easy to integrate, but lacks advanced features (e.g., tooltips, animations) due to time constraints.
+* **No Caching or Error Handling**: Omitted for simplicity; in production, I'd add caching (e.g., React Query) and robust error boundaries.
+* **API Limit=100**: Caps results for performance, but limits comprehensive data analysis—ideal for demo but not scalable without pagination.
+
+## Production-Readiness Considerations
+* **Server-Side API Calls**: Reduces client-side load, but no rate limiting or retry logic was added due to time.
+* **Responsive Design**: MUI ensures mobile-friendliness, but extensive testing was skipped.
+* **Security**: No API keys needed, but encodeURIComponent sanitizes inputs—production would require more robust validation.
+* **Testing**: Basic manual testing was done; unit tests (e.g., Jest, React Testing Library) were omitted for time but are critical for production.
+
+## Future Improvements (If More Time)
+* **Advanced Filtering**: Add pharmacological class or route filters from the API.
+* **Pagination**: Implement skip and limit for larger datasets.
+* **Error Handling**: Add loading states, retry logic, and user-friendly error messages.
+* **Data Caching**: Use SWR or React Query for better performance.
+* **Accessibility**: Enhance ARIA labels and keyboard navigation for WCAG compliance.
+* **UI Polish**: Add custom animations, tooltips for charts, and a more detailed layout.

@@ -141,68 +141,130 @@ export default function FilterDropdown({ onFilterChange }) {
 
 ---
 
-### MetricsDisplay.tsx Requirements
-
-```markdown
 ## Component: MetricsDisplay.tsx
 
 ### Purpose
-A stateless component to display key metrics (total reports, deaths, hospitalizations) for the searched drug’s adverse events.
+A stateless component to display key metrics (total reports, deaths, hospitalizations, and optional additional metrics) for the searched drug’s adverse events.
 
 ### Type
 Stateless Component (can be server or client, depending on parent).
 
 ### Props
-- `metrics: { total: number, deaths: number, hospitalizations: number }`
-  - Object containing aggregated counts from API data.
+- `metrics: { 
+    total: number, 
+    deaths: number, 
+    hospitalizations: number, 
+    lifeThreatening?: number, 
+    bySex?: { male: number, female: number, unknown: number }, 
+    seriousNonDH?: number 
+  }`
+  - Object containing aggregated counts from API data, with optional fields for new metrics.
 
 ### Behavior
 - Renders metrics in a simple, readable format.
-- Displays "0" for any metric if no data is provided.
+- Displays "0" or "N/A" for any metric if no data is provided.
 - Updates automatically when new `metrics` prop is received.
 
 ### UI Requirements
-- **Layout**: Grid or flexbox with three sections.
-- **Text**: 
-  - "Total Reports: X".
-  - "Deaths: Y".
-  - "Hospitalizations: Z".
-- **Tailwind CSS**: `border`, `p-4`, `rounded`, `bg-gray-100` for each metric box.
+- **Layout**: Grid or flexbox with 3-5 sections (depending on added metrics).
+- **Text**:
+  - Labels (e.g., "Total Reports", "Deaths"): Use MUI `Typography` with `variant="subtitle1"`, `fontWeight="bold"`.
+  - Values (e.g., "1,000"): Use `variant="body1"`.
+  - New metrics follow the same format (e.g., "Life-Threatening: X").
+- **Tailwind CSS**: Use MUI `Card` with `variant="outlined"`, `sx={{ p: 2, bgcolor: '#FFFFFF', borderRadius: 1 }}` for each metric box.
+- **Header**: Add "Key Metrics" title above the grid using `Typography` with `variant="h6"`, `sx={{ mb: 2 }}`.
 
 ### Implementation Details
 - Purely presentational—no state or API logic.
 - Destructure `metrics` prop and render values.
-- Handle null/undefined case with defaults (e.g., `{ total = 0, deaths = 0, hospitalizations = 0 }`).
+- Handle null/undefined case with defaults (e.g., `{ total = 0, deaths = 0, hospitalizations = 0, lifeThreatening = 0, bySex = { male: 0, female: 0, unknown: 0 }, seriousNonDH = 0 }`).
+- Use MUI `Grid` with `container`, `spacing={2}`, `justifyContent="center"`.
 
 ### Example Code Snippet
 ```jsx
+import { Card, Grid, Typography } from "@mui/material";
+
 export default function MetricsDisplay({ metrics }) {
-  const { total = 0, deaths = 0, hospitalizations = 0 } = metrics || {};
+  const { 
+    total = 0, 
+    deaths = 0, 
+    hospitalizations = 0, 
+    lifeThreatening = 0, 
+    bySex = { male: 0, female: 0, unknown: 0 }, 
+    seriousNonDH = 0 
+  } = metrics || {};
 
   return (
-    <div className="grid grid-cols-3 gap-4 mt-4">
-      <div className="border p-4 rounded bg-gray-100">
-        <p className="font-bold">Total Reports</p>
-        <p>{total}</p>
-      </div>
-      <div className="border p-4 rounded bg-gray-100">
-        <p className="font-bold">Deaths</p>
-        <p>{deaths}</p>
-      </div>
-      <div className="border p-4 rounded bg-gray-100">
-        <p className="font-bold">Hospitalizations</p>
-        <p>{hospitalizations}</p>
-      </div>
+    <div>
+      <Typography variant="h6" sx={{ mb: 2 }}>Key Metrics</Typography>
+      <Grid container spacing={2} justifyContent="center">
+        <Grid item xs={4}>
+          <Card variant="outlined" sx={{ p: 2, bgcolor: '#FFFFFF', borderRadius: 1 }}>
+            <Typography variant="subtitle1" fontWeight="bold">Total Reports</Typography>
+            <Typography variant="body1">{total}</Typography>
+          </Card>
+        </Grid>
+        <Grid item xs={4}>
+          <Card variant="outlined" sx={{ p: 2, bgcolor: '#FFFFFF', borderRadius: 1 }}>
+            <Typography variant="subtitle1" fontWeight="bold">Deaths</Typography>
+            <Typography variant="body1">{deaths}</Typography>
+          </Card>
+        </Grid>
+        <Grid item xs={4}>
+          <Card variant="outlined" sx={{ p: 2, bgcolor: '#FFFFFF', borderRadius: 1 }}>
+            <Typography variant="subtitle1" fontWeight="bold">Hospitalizations</Typography>
+            <Typography variant="body1">{hospitalizations}</Typography>
+          </Card>
+        </Grid>
+        <Grid item xs={4}>
+          <Card variant="outlined" sx={{ p: 2, bgcolor: '#FFFFFF', borderRadius: 1 }}>
+            <Typography variant="subtitle1" fontWeight="bold">Life-Threatening</Typography>
+            <Typography variant="body1">{lifeThreatening}</Typography>
+          </Card>
+        </Grid>
+        <Grid item xs={4}>
+          <Card variant="outlined" sx={{ p: 2, bgcolor: '#FFFFFF', borderRadius: 1 }}>
+            <Typography variant="subtitle1" fontWeight="bold">Serious (Non-DH)</Typography>
+            <Typography variant="body1">{seriousNonDH}</Typography>
+          </Card>
+        </Grid>
+        <Grid item xs={4}>
+          <Card variant="outlined" sx={{ p: 2, bgcolor: '#FFFFFF', borderRadius: 1 }}>
+            <Typography variant="subtitle1" fontWeight="bold">Male</Typography>
+            <Typography variant="body1">{bySex.male}</Typography>
+          </Card>
+        </Grid>
+        <Grid item xs={4}>
+          <Card variant="outlined" sx={{ p: 2, bgcolor: '#FFFFFF', borderRadius: 1 }}>
+            <Typography variant="subtitle1" fontWeight="bold">Female</Typography>
+            <Typography variant="body1">{bySex.female}</Typography>
+          </Card>
+        </Grid>
+        <Grid item xs={4}>
+          <Card variant="outlined" sx={{ p: 2, bgcolor: '#FFFFFF', borderRadius: 1 }}>
+            <Typography variant="subtitle1" fontWeight="bold">Unknown</Typography>
+            <Typography variant="body1">{bySex.unknown}</Typography>
+          </Card>
+        </Grid>
+      </Grid>
     </div>
   );
 }
 ```
-### Acceptance Criteria
 
-- Displays correct values from metrics prop.
-- Shows "0" for missing or null data.
-- Renders in a clean, grid-based layout with Tailwind styling.
-
+Acceptance Criteria
+Displays correct values from metrics prop, including new metrics (life-threatening, serious non-death/hospitalization, by sex).
+Shows "0" or "N/A" for missing or null data.
+Renders in a clean, grid-based layout with MUI styling, matching the provided image (3-5 cards per row, depending on added metrics).
+Header "Key Metrics" is visible and styled with MUI h6.
+Notes
+Time Constraint: Adding these metrics requires updates to page.jsx to calculate and pass them via the metrics prop, but they’re feasible within 1 hour if prioritized over less critical features.
+API Fields:
+serious: For total serious events (non-death, non-hospitalization).
+seriousnesslifethreatening: For life-threatening events.
+patientsex: For sex-based counts.
+Ensure parsing logic in page.jsx aggregates these fields from the API response.
+UI Fit: The grid layout can adjust to 3-5 cards, maintaining the visual style from the image (e.g., white cards with rounded corners, gray labels, black values).
 
 ---
 
@@ -292,5 +354,4 @@ export default function TrendChart({ events }) {
 
 - Chart renders with correct years and counts when events is provided.
 - Displays "No data to display" if events is empty or null.
-- Bars reflect filtered data when used with FilterDropdown.
-
+Bars reflect filtered data when used with FilterDropdown.
