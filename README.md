@@ -3,7 +3,7 @@
 [![Live Demo](https://img.shields.io/badge/Live_Demo-Visit_Site-blue)](https://adverse-event-visualize-mu.vercel.app)
 
 ## Overview
-The Adverse Event Analyzer is a web application built with Next.js, Tailwind CSS, and Shadcn UI to help healthcare professionals analyze drug-related adverse event reports using the FDA's OpenFDA Adverse Events API. This tool provides actionable insights through search, filtering, metrics, and time trend visualization, enabling users to understand key metrics (e.g., total reports, deaths, hospitalizations) and trends for specific drugs. Developed as a take-home interview assignment, the project was completed within a 1.5-hour window, prioritizing production-readiness over extensive features.
+The Adverse Event Analyzer is a web application built with Next.js, Tailwind CSS, and Shadcn UI to help healthcare professionals analyze drug-related adverse event reports using the FDA's OpenFDA Adverse Events API. This tool provides actionable insights through search, filtering, metrics, and time trend visualization, enabling users to understand key metrics (e.g., total reports, deaths, hospitalizations) and trends for specific drugs. The project was completed within a 1.5-hour window, prioritizing production-readiness over extensive features.
 
 ## Features
 - **Drug Search**: Search for adverse events by drug name (e.g., "DURAGESIC-100").
